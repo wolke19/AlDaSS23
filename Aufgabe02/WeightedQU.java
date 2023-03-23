@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -46,7 +45,7 @@ public class WeightedQU {
         else return false;
     }
 
-    public void createConnections (WeightedQU uf) throws IOException {
+    public static void createConnections (WeightedQU uf) throws IOException {
         Path pathP = Paths.get("Aufgabe02/p.txt");
         Path pathQ = Paths.get("Aufgabe02/q.txt");
 
@@ -71,7 +70,7 @@ public class WeightedQU {
 
     public static void main(String[] args) throws IOException {
         WeightedQU uf = new WeightedQU(11);
-        uf.createConnections(uf);
+        createConnections(uf);
 
         Path citiesPath = Paths.get("Aufgabe02/cities.txt");
         Scanner citieScanner = new Scanner(citiesPath);
