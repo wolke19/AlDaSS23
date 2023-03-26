@@ -50,7 +50,7 @@ class Junction {
     //     return junctionArray[pTemp].number;
     // }
     update() {
-        let maxSize = Math.max(...junctionArray.map(o => o.size));
+        // let maxSize = Math.max(...junctionArray.map(o => o.size));
         // if (this.size === maxSize){
         //     this.x = canvas.width/2;
         //     this.y = canvas.height/2;
@@ -119,7 +119,7 @@ class Edge {
 // STANDALONE FUNCTIONS_________________________________________________________________________________________________________________
 function find(p){
     let pTemp = p;
-    while (pTemp != junctionArray[pTemp].group){
+    while (pTemp !== junctionArray[pTemp].group){
         pTemp = junctionArray[pTemp].group;
     }
     return junctionArray[pTemp].number;
@@ -148,7 +148,7 @@ function init(){
     }
     union(1,2);
     union(1,2);
-    union(2,3);
+
     union(4,6);
     union(0,4);
     union(4,3);
