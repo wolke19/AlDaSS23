@@ -41,8 +41,7 @@ public class WeightedQU {
     }
 
     public boolean connected (int p, int q){
-        if (find(p) == find(q)) return true;
-        else return false;
+        return (find(p) == find(q));
     }
 
     public static void createConnections (WeightedQU uf) throws IOException {
