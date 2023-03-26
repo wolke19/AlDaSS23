@@ -42,6 +42,13 @@ class Junction {
         this.speedX = .1;
         this.speedY = .1;
     }
+    // find(){
+    //     let pTemp = this.number;
+    //     while (pTemp != this.group){
+    //         pTemp = junctionArray[pTemp].group;
+    //     }
+    //     return junctionArray[pTemp].number;
+    // }
     update() {
         let maxSize = Math.max(...junctionArray.map(o => o.size));
         // if (this.size === maxSize){
@@ -86,14 +93,14 @@ class Junction {
         this.y += this.speedY;
     }
     draw(){
-        ctx.fillStyle = "hsl(" + (this.group * 36 ) + ", 100%, 50%)";
+        ctx.fillStyle = "hsl(" + (find(this.number) * 36 ) + ", 100%, 50%)";
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
         ctx.fill();
         ctx.strokeStyle = "white";
         ctx.font = "15px Arial";
-        ctx.strokeText("Number: " + this.number + " | Group: " + this.group + " | Size: " + this.size,
-            this.x - this.radius, this.y - this.radius - 5, this.radius * 4);
+        ctx.strokeText("Number: " + this.number + " | Wurzel: " + this.group + " | Size: " + this.size + " | Gruppe: " + this.group,
+            this.x - this.radius * 2, this.y - this.radius - 5, this.radius * 5);
 
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
@@ -132,7 +139,6 @@ function union(p,q){
     else{
         junctionArray[qRoot].group = pRoot;
         junctionArray[pRoot].size += junctionArray[qRoot].size;
-        console.log("hey")
     }
 }
 
