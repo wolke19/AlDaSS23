@@ -50,9 +50,9 @@ class Junction {
         //     return;
         // }
 
-        let closePushParameter = 7;
-        let pullEdgesParameter = 50;
-        let pushAllParameter = 300;
+        let closePushParameter = 10;
+        let pullEdgesParameter = 100;
+        let pushAllParameter = 600;
 
         this.speedX /= 1.1;
         this.speedY /= 1.1;
