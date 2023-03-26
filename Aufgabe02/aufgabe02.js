@@ -99,7 +99,7 @@ class Junction {
         ctx.fill();
         ctx.strokeStyle = "white";
         ctx.font = "15px Arial";
-        ctx.strokeText("Number: " + this.number + " | Wurzel: " + this.group + " | Size: " + this.size + " | Gruppe: " + this.group,
+        ctx.strokeText("Number: " + this.number + " | Root: " + this.group + " | Size: " + this.size + " | Group: " + this.group,
             this.x - this.radius * 2, this.y - this.radius - 5, this.radius * 5);
 
         ctx.moveTo(this.x, this.y);
