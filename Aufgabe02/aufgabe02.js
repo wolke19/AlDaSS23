@@ -81,8 +81,6 @@ class Junction {
                 this.speedX -= dx / (pushAllParameter * distance);
                 this.speedY -= dy / (pushAllParameter * distance);
             }
-
-
         }
 
         // Rebound from walls
@@ -93,15 +91,18 @@ class Junction {
         this.y += this.speedY;
     }
     draw(){
-        ctx.fillStyle = "hsl(" + (find(this.number) * 36 ) + ", 100%, 50%)";
+        ctx.fillStyle = "hsl(" + 150 + (find(this.number) * 36 ) + ", 100%, 50%)";
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
         ctx.fill();
+        ctx.fillStyle = "white";
         ctx.strokeStyle = "white";
-        ctx.font = "15px Arial";
-        ctx.strokeText("Number: " + this.number + " | Root: " + this.group + " | Size: " + this.size + " | Group: " + this.group,
-            this.x - this.radius * 2, this.y - this.radius - 5, this.radius * 5);
-
+        ctx.font = "16px Arial";
+        ctx.fillText("Root: " + this.group + " | Size: " + this.size,
+            this.x - this.radius , this.y - this.radius - 5, this.radius * 2);
+        ctx.fillText("group: " + find(this.number), this.x - 20, this.y + 30, this.radius);
+        ctx.font = "50px Arial";
+        ctx.fillText(this.number, this.x - 13, this.y + 15, this.radius);
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
         ctx.stroke();
