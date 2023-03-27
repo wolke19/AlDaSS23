@@ -175,7 +175,7 @@ class Junction {
 
         ctx.fillStyle = "black";
         ctx.font = "16px Arial";
-        ctx.fillText("Root: " + this.group + " | Size: " + this.size,
+        ctx.fillText("Parent: " + this.group + " | Size: " + this.size,
             this.x, this.y - this.radius - 5, this.radius * 2);
         ctx.fillText("group: " + find(this.number), this.x, this.y + 30, this.radius);
         ctx.font = "50px Arial";
