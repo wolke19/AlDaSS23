@@ -140,7 +140,7 @@ class Junction {
                 this.speedX -= dx / (closePushParameter * distance);
                 this.speedY -= dy / (closePushParameter * distance);
             }
-            else if (this.group === junctionArray[i].group && distance >= this.radius * 5) {
+            else if (connected(this.number, i) && distance >= this.radius * 5) {
                 this.speedX += dx / (pullEdgesParameter * distance);
                 this.speedY += dy / (pullEdgesParameter * distance);
             }
