@@ -4,11 +4,10 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const junctionArray = [];
+let animationState = 0;
 
-const middle = {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-}
+ctx.textAlign = "center";
+
 const mouse = {
     x: null,
     y: null,
@@ -23,6 +22,7 @@ window.addEventListener("resize", function () {
     middle.y = canvas.height/2;
 });
 addEventListener("click", function (event){
+
 })
 canvas.addEventListener("mousemove", function (event){
     mouse.x = event.x;
@@ -99,22 +99,22 @@ class Junction {
         ctx.strokeStyle = "white";
         ctx.font = "16px Arial";
         ctx.fillText("Root: " + this.group + " | Size: " + this.size,
-            this.x - this.radius , this.y - this.radius - 5, this.radius * 2);
-        ctx.fillText("group: " + find(this.number), this.x - 20, this.y + 30, this.radius);
+            this.x, this.y - this.radius - 5, this.radius * 2);
+        ctx.fillText("group: " + find(this.number), this.x, this.y + 30, this.radius);
         ctx.font = "50px Arial";
-        ctx.fillText(this.number, this.x - 13, this.y + 15, this.radius);
+        ctx.fillText(this.number, this.x, this.y + 15, this.radius);
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
         ctx.stroke();
     }
 }
 
-class Edge {
-    constructor(junctionA, junctionB) {
-        this.JuncA = junctionA;
-        this.JuncB = junctionB;
-    }
-}
+// class Edge {
+//     constructor(junctionA, junctionB) {
+//         this.JuncA = junctionA;
+//         this.JuncB = junctionB;
+//     }
+// }
 
 
 // STANDALONE FUNCTIONS_________________________________________________________________________________________________________________
@@ -165,11 +165,42 @@ function prepareNextAnimationFrame(){
     }
 }
 
+function interactivity(){
+//     EingabeFeld
+
+    ctx.fillRect(canvas.width / 2 - 100, canvas.height / 1.2, 200, 50);
+    ctx.fillStyle = "grey"
+    ctx.fillRect(canvas.width / 2 - 100, canvas.height / 1.2 - 50, 100, 50);
+    ctx.fillRect(canvas.width / 2, canvas.height / 1.2 - 50, 100, 50);
+    ctx.strokeStyle = "black";
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 1.2 - 50);
+    ctx.lineTo(canvas.width / 2, canvas.height / 1.2);
+    ctx.stroke();
+    ctx.fillStyle = "black";
+    ctx.font = "12px Arial";
+    ctx.fillText("start union input!",canvas.width / 2 - 50,canvas.height / 1.2 - 20);
+    ctx.fillText("UNION!",canvas.width / 2 + 50,canvas.height / 1.2 - 20);
+}
 
 // ANIMATION____________________________________________________________________________________________________________
 function animate(){
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    prepareNextAnimationFrame();
+
+    switch (animationState) {
+        case 0: {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            prepareNextAnimationFrame();
+            interactivity();
+        }
+        case 1:{
+            // TODO: insert input1 animation
+        }
+        case 2:{
+            // TODO: insert input2 animation
+        }
+
+    }
+
     requestAnimationFrame(animate);
 }
 
