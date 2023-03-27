@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+const radius = 50;
 const junctionArray = [];
 let animationState = 0;
 const joinpartners = {
@@ -43,9 +44,20 @@ addEventListener("click", function (event){
             break;
         }
         case 1: {
-            animationState = 0;
-            joinpartners.p = null;
-            joinpartners.q = null;
+            for (let i = 0; i < junctionArray.length; i++) {
+                if (event.x > junctionArray[i].x - radius &&
+                    event.x < junctionArray[i].x + radius &&
+                    event.y > junctionArray[i].y - radius &&
+                    event.y < junctionArray[i].y + radius){
+                    if (joinpartners.p === null) {
+                        joinpartners.p = junctionArray[i].number;
+                        inputAlert.draw("second join partner?");
+                    }
+                    else if (joinpartners.q === null) {
+                        joinpartners.q = junctionArray[i].number;
+                    }
+                }
+            }
             break;
         }
         case 2: {
@@ -98,6 +110,7 @@ window.addEventListener("keypress", function (event){
     }
 })
 
+
 // CLASSES______________________________________________________________________________________________________________
 class Junction {
     constructor(number) {
@@ -107,7 +120,7 @@ class Junction {
 
         this.x = (canvas.width / 2 - 50) + Math.random() * 100;
         this.y = (canvas.height / 2 -50) + Math.random() * 100;
-        this.radius = 40;
+        this.radius = radius;
         this.speedX = .1;
         this.speedY = .1;
     }
@@ -231,7 +244,7 @@ function init() {
 let bigBox = new Textbox(textfieldX,textfieldY,textfieldW,textfieldH,null, null,"white","black");
 let newUnionBox = new Textbox(textfieldX,textfieldY,textfieldW,textfieldH/2,
     "black","18px Arial", "grey","black");
-let inputAlert = new Textbox(canvas.width/2 - 200, canvas.height/2 - 70, 400, 140,
+let inputAlert = new Textbox(canvas.width/2 - 200, 0, 400, 90,
     "black", "35px Arial", "white", "black");
 let textField = new Textbox(textfieldX, textfieldY + textfieldH/2, textfieldW,textfieldH/2,
     "black", "15px Arial","white","black");
