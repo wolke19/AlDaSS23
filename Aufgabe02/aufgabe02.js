@@ -6,7 +6,13 @@ canvas.height = window.innerHeight;
 const junctionArray = [];
 let animationState = 0;
 
+// CANVAS SETTINGS + LAYOUT CONSTANTS__________________________________________
 ctx.textAlign = "center";
+
+const textfieldW = 200;
+const textfieldH = 100;
+const textfieldX = canvas.width / 2 - textfieldW / 2;
+const textfieldY = canvas.height - textfieldH * 1.5;
 
 const mouse = {
     x: null,
@@ -18,11 +24,15 @@ const mouse = {
 window.addEventListener("resize", function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    middle.x = canvas.width/2;
-    middle.y = canvas.height/2;
 });
-addEventListener("click", function (event){
-
+canvas.addEventListener("click", function (event){
+    if (event.x > textfieldX &&
+        event.x < textfieldX + textfieldW / 2 &&
+        event.y > textfieldY &&
+        event.y < textfieldY + textfieldH / 2){
+        animationState = 1;
+    }
+    else animationState = 0;
 })
 canvas.addEventListener("mousemove", function (event){
     mouse.x = event.x;
@@ -85,36 +95,38 @@ class Junction {
 
         // Rebound from walls
         if (this.x < 100 || this.x > canvas.width - 100) this.speedX *= -1;
-        if (this.y < 100 || this.y > canvas.height - 100) this.speedY *= -1;
+        if (this.y < 100 || this.y > canvas.height - (canvas.height - textfieldY + 100)) this.speedY *= -1;
 
         this.x += this.speedX;
         this.y += this.speedY;
+    }
+    drawEdges(){
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
+        ctx.stroke();
+    //     Wieso teilweise sichtobar??? TODO:fix
     }
     draw(){
         ctx.fillStyle = "hsl(" + 150 + (find(this.number) * 36 ) + ", 100%, 50%)";
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
         ctx.fill();
-        ctx.fillStyle = "white";
-        ctx.strokeStyle = "white";
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
+        ctx.stroke();
+
+        ctx.fillStyle = "black";
         ctx.font = "16px Arial";
         ctx.fillText("Root: " + this.group + " | Size: " + this.size,
             this.x, this.y - this.radius - 5, this.radius * 2);
         ctx.fillText("group: " + find(this.number), this.x, this.y + 30, this.radius);
         ctx.font = "50px Arial";
         ctx.fillText(this.number, this.x, this.y + 15, this.radius);
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
-        ctx.stroke();
+
     }
 }
 
-// class Edge {
-//     constructor(junctionA, junctionB) {
-//         this.JuncA = junctionA;
-//         this.JuncB = junctionB;
-//     }
-// }
 
 
 // STANDALONE FUNCTIONS_________________________________________________________________________________________________________________
@@ -152,55 +164,59 @@ function init(){
 
     union(4,6);
     union(0,4);
-    union(4,3);
-    
-    union(8,9);
     console.log()
 }
 
 function prepareNextAnimationFrame(){
     for (let i = 0; i < junctionArray.length; i++) {
         junctionArray[i].update();
+        junctionArray[i].drawEdges();
         junctionArray[i].draw();
     }
 }
 
 function interactivity(){
 //     EingabeFeld
-
-    ctx.fillRect(canvas.width / 2 - 100, canvas.height / 1.2, 200, 50);
+    ctx.fillStyle = "white";
+    ctx.fillRect(textfieldX, textfieldY + textfieldH / 2, textfieldW, textfieldH/2);
     ctx.fillStyle = "grey"
-    ctx.fillRect(canvas.width / 2 - 100, canvas.height / 1.2 - 50, 100, 50);
-    ctx.fillRect(canvas.width / 2, canvas.height / 1.2 - 50, 100, 50);
+    ctx.fillRect(textfieldX, textfieldY, textfieldW, textfieldH / 2);
+
     ctx.strokeStyle = "black";
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height / 1.2 - 50);
-    ctx.lineTo(canvas.width / 2, canvas.height / 1.2);
+    ctx.moveTo(textfieldX + textfieldW / 2, textfieldY);
+    ctx.lineTo(textfieldX + textfieldW / 2, textfieldY + textfieldH / 2);
     ctx.stroke();
+    ctx.moveTo(textfieldX, textfieldY + textfieldH/2);
+    ctx.lineTo(textfieldX + textfieldW, textfieldY + textfieldH / 2);
+    ctx.stroke();
+    ctx.strokeRect(textfieldX, textfieldY, textfieldW, textfieldH);
     ctx.fillStyle = "black";
     ctx.font = "12px Arial";
-    ctx.fillText("start union input!",canvas.width / 2 - 50,canvas.height / 1.2 - 20);
-    ctx.fillText("UNION!",canvas.width / 2 + 50,canvas.height / 1.2 - 20);
+    ctx.fillText("start union input!",textfieldX + 0.25 * textfieldW,textfieldY + 0.25 * textfieldH + 5);
+    ctx.fillText("UNION!",textfieldX + 0.75 * textfieldW,textfieldY + 0.25 * textfieldH + 5);
 }
 
 // ANIMATION____________________________________________________________________________________________________________
 function animate(){
-
     switch (animationState) {
         case 0: {
             ctx.clearRect(0,0,canvas.width, canvas.height);
             prepareNextAnimationFrame();
             interactivity();
+            break;
         }
         case 1:{
             // TODO: insert input1 animation
+            break;
         }
         case 2:{
             // TODO: insert input2 animation
+            break;
         }
 
     }
-
+    console.log(animationState);
     requestAnimationFrame(animate);
 }
 
