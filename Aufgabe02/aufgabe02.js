@@ -3,7 +3,12 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const radius = 50;
+if (canvas.width < 500){
+    ctx.scale(0.5,0.5);
+}
+
+
+let radius = 45;
 const junctionArray = [];
 let animationState = 0;
 const joinpartners = {
@@ -28,10 +33,8 @@ addEventListener("resize", function () {
     canvas.height = window.innerHeight;
 });
 addEventListener("click", function (event){
-
     switch (animationState){
         case 0: {
-
             if (event.x > newUnionBox.x &&
                 event.x < newUnionBox.x + newUnionBox.width &&
                 event.y > newUnionBox.y &&
