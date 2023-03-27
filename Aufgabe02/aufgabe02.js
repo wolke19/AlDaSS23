@@ -161,7 +161,6 @@ class Junction {
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
         ctx.stroke();
-    //     Wieso teilweise sichtobar??? TODO:fix
     }
     draw(){
         ctx.fillStyle = "hsl(" + 150 + (find(this.number) * 1000 ) + ", 100%, 50%)";
@@ -182,7 +181,6 @@ class Junction {
         ctx.fillText(this.number, this.x, this.y + 15, this.radius);
     }
 }
-
 class Textbox {
     constructor(x, y, w, h, textCol, font, fCol, bCol) {
         this.x = x;
