@@ -5,8 +5,10 @@ canvas.height = window.innerHeight;
 
 const junctionArray = [];
 let animationState = 0;
-
-// CANVAS SETTINGS + LAYOUT CONSTANTS__________________________________________
+const joinpartners = {
+    p: null,
+    q: null,
+}
 ctx.textAlign = "center";
 
 const textfieldW = 200;
@@ -19,24 +21,72 @@ const mouse = {
     y: null,
 }
 
-
 // EVENTS_______________________________________________________________________________________________________________
-window.addEventListener("resize", function () {
+addEventListener("resize", function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
-canvas.addEventListener("click", function (event){
-    if (event.x > textfieldX &&
-        event.x < textfieldX + textfieldW / 2 &&
-        event.y > textfieldY &&
-        event.y < textfieldY + textfieldH / 2){
-        animationState = 1;
+addEventListener("click", function (event){
+
+    switch (animationState){
+        case 0: {
+
+            if (event.x > newUnionBox.x &&
+                event.x < newUnionBox.x + newUnionBox.width &&
+                event.y > newUnionBox.y &&
+                event.y < newUnionBox.y + newUnionBox.height){
+                animationState = 1;
+            }
+            else {
+                animationState = 0;
+            }
+            break;
+        }
+        case 1: {
+            animationState = 0;
+            joinpartners.p = null;
+            joinpartners.q = null;
+            break;
+        }
+        case 2: {
+            if (event.x > canvas.width/2 - 170 &&
+                event.y > canvas.height/2 + 80 &&
+                event.x < canvas.width/2 - 20 &&
+                event.y < canvas.height/2 + 150) {
+                union(joinpartners.p, joinpartners.q);
+            }
+            joinpartners.p = null;
+            joinpartners.q = null;
+            animationState = 0;
+            break;
+        }
     }
-    else animationState = 0;
 })
-canvas.addEventListener("mousemove", function (event){
+
+addEventListener("mousemove", function (event){
     mouse.x = event.x;
     mouse.y = event.y;
+})
+
+window.addEventListener("keypress", function (event){
+    if (animationState === 1){
+        if (joinpartners.p === null) {
+            joinpartners.p = event.key;
+            inputAlert.draw("second join partner?");
+        }
+        else if (joinpartners.q === null) {
+            joinpartners.q = event.key;
+        }
+        else return;
+    }
+    if (animationState === 2){
+        if (event.key === "Enter"){
+            union(joinpartners.p, joinpartners.q);
+            joinpartners.p = null;
+            joinpartners.q = null;
+            animationState = 0;
+        }
+    }
 })
 
 // CLASSES______________________________________________________________________________________________________________
@@ -52,21 +102,7 @@ class Junction {
         this.speedX = .1;
         this.speedY = .1;
     }
-    // find(){
-    //     let pTemp = this.number;
-    //     while (pTemp != this.group){
-    //         pTemp = junctionArray[pTemp].group;
-    //     }
-    //     return junctionArray[pTemp].number;
-    // }
     update() {
-        // let maxSize = Math.max(...junctionArray.map(o => o.size));
-        // if (this.size === maxSize){
-        //     this.x = canvas.width/2;
-        //     this.y = canvas.height/2;
-        //     return;
-        // }
-
         let closePushParameter = 10;
         let pullEdgesParameter = 100;
         let pushAllParameter = 600;
@@ -107,7 +143,7 @@ class Junction {
     //     Wieso teilweise sichtobar??? TODO:fix
     }
     draw(){
-        ctx.fillStyle = "hsl(" + 150 + (find(this.number) * 36 ) + ", 100%, 50%)";
+        ctx.fillStyle = "hsl(" + 150 + (find(this.number) * 1000 ) + ", 100%, 50%)";
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
         ctx.fill();
@@ -123,11 +159,34 @@ class Junction {
         ctx.fillText("group: " + find(this.number), this.x, this.y + 30, this.radius);
         ctx.font = "50px Arial";
         ctx.fillText(this.number, this.x, this.y + 15, this.radius);
-
     }
 }
 
+class Textbox {
+    constructor(x, y, w, h, textCol, font, fCol, bCol) {
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        this.fillColor = fCol;
+        this.borderColor = bCol;
+        this.textCol = textCol;
+        this.font = font;
+    }
+    draw(text){
+        ctx.fillStyle = this.fillColor;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.strokeStyle = this.borderColor;
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
 
+        if (text != null){
+            this.text = text;
+            ctx.font = this.font;
+            ctx.fillStyle = this.textCol;
+            ctx.fillText(this.text, this.x + this.width/2, this.y + this.height / 2, this.width);
+        }
+    }
+}
 
 // STANDALONE FUNCTIONS_________________________________________________________________________________________________________________
 function find(p){
@@ -154,69 +213,55 @@ function union(p,q){
         junctionArray[pRoot].size += junctionArray[qRoot].size;
     }
 }
-
-function init(){
+function init() {
     for (let i = 0; i < 10; i++) {
         junctionArray.push(new Junction(i))
     }
-    union(1,2);
-    union(1,2);
-
-    union(4,6);
-    union(0,4);
-    console.log()
 }
 
-function prepareNextAnimationFrame(){
-    for (let i = 0; i < junctionArray.length; i++) {
-        junctionArray[i].update();
-        junctionArray[i].drawEdges();
-        junctionArray[i].draw();
-    }
-}
-
-function interactivity(){
-//     EingabeFeld
-    ctx.fillStyle = "white";
-    ctx.fillRect(textfieldX, textfieldY + textfieldH / 2, textfieldW, textfieldH/2);
-    ctx.fillStyle = "grey"
-    ctx.fillRect(textfieldX, textfieldY, textfieldW, textfieldH / 2);
-
-    ctx.strokeStyle = "black";
-    ctx.beginPath();
-    ctx.moveTo(textfieldX + textfieldW / 2, textfieldY);
-    ctx.lineTo(textfieldX + textfieldW / 2, textfieldY + textfieldH / 2);
-    ctx.stroke();
-    ctx.moveTo(textfieldX, textfieldY + textfieldH/2);
-    ctx.lineTo(textfieldX + textfieldW, textfieldY + textfieldH / 2);
-    ctx.stroke();
-    ctx.strokeRect(textfieldX, textfieldY, textfieldW, textfieldH);
-    ctx.fillStyle = "black";
-    ctx.font = "12px Arial";
-    ctx.fillText("start union input!",textfieldX + 0.25 * textfieldW,textfieldY + 0.25 * textfieldH + 5);
-    ctx.fillText("UNION!",textfieldX + 0.75 * textfieldW,textfieldY + 0.25 * textfieldH + 5);
-}
+let bigBox = new Textbox(textfieldX,textfieldY,textfieldW,textfieldH,null, null,"white","black");
+let newUnionBox = new Textbox(textfieldX,textfieldY,textfieldW,textfieldH/2,
+    "black","18px Arial", "grey","black");
+let inputAlert = new Textbox(canvas.width/2 - 200, canvas.height/2 - 70, 400, 140,
+    "black", "35px Arial", "white", "black");
+let textField = new Textbox(textfieldX, textfieldY + textfieldH/2, textfieldW,textfieldH/2,
+    "black", "15px Arial","white","black");
+let yesField = new Textbox(canvas.width/2 - 170, canvas.height/2 + 80, 150, 70,
+    "black", "35px Arial", "white", "green");
+let noField = new Textbox(canvas.width/2 + 20, canvas.height/2 + 80, 150, 70,
+    "black", "35px Arial", "white", "red");
 
 // ANIMATION____________________________________________________________________________________________________________
 function animate(){
     switch (animationState) {
         case 0: {
             ctx.clearRect(0,0,canvas.width, canvas.height);
-            prepareNextAnimationFrame();
-            interactivity();
+            for (let i = 0; i < junctionArray.length; i++) {
+                junctionArray[i].update();
+                junctionArray[i].drawEdges();
+                junctionArray[i].draw();
+            }
+            bigBox.draw();
+            newUnionBox.draw("NEW UNION");
             break;
         }
         case 1:{
-            // TODO: insert input1 animation
+            inputAlert.draw("first join partner?");
+            newUnionBox.draw("NEW UNION");
+            textField.draw("P: " + joinpartners.p + "  |  Q: " + joinpartners.q );
+            if (joinpartners.p != null && joinpartners.q === null) inputAlert.draw("second join partner?");
+            else if (joinpartners.p != null && joinpartners.q != null) {
+                inputAlert.draw("Done! Compute?");
+                animationState = 2;
+            }
             break;
         }
         case 2:{
-            // TODO: insert input2 animation
+            yesField.draw("YES!");
+            noField.draw("CANCEL")
             break;
         }
-
     }
-    console.log(animationState);
     requestAnimationFrame(animate);
 }
 
