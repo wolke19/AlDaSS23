@@ -36,8 +36,8 @@ class Junction {
         this.group = number;
         this.size = 1;
 
-        this.x = canvas.width / 4 + Math.random() * 300;
-        this.y = canvas.height / 4 + Math.random() * 300;
+        this.x = (canvas.width / 2 - 50) + Math.random() * 100;
+        this.y = (canvas.height / 2 -50) + Math.random() * 100;
         this.radius = 40;
         this.speedX = .1;
         this.speedY = .1;
