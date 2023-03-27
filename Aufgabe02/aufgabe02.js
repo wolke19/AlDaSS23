@@ -243,7 +243,7 @@ function init() {
 
 let bigBox = new Textbox(textfieldX,textfieldY,textfieldW,textfieldH,null, null,"white","black");
 let newUnionBox = new Textbox(textfieldX,textfieldY,textfieldW,textfieldH/2,
-    "black","18px Arial", "grey","black");
+    "black","15px Arial", "grey","black");
 let inputAlert = new Textbox(canvas.width/2 - 200, 0, 400, 90,
     "black", "35px Arial", "white", "black");
 let textField = new Textbox(textfieldX, textfieldY + textfieldH/2, textfieldW,textfieldH/2,
