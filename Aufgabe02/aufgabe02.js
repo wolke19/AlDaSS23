@@ -287,9 +287,8 @@ function animate(){
             break;
         }
     }
-    // if (infoBox){
-    //     infoBox.draw("no support for smartphones");
-    // }
+
+
     requestAnimationFrame(animate);
 }
 
