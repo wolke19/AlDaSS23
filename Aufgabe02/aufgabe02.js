@@ -69,22 +69,31 @@ addEventListener("mousemove", function (event){
 })
 
 window.addEventListener("keypress", function (event){
-    if (animationState === 1){
-        if (joinpartners.p === null) {
-            joinpartners.p = event.key;
-            inputAlert.draw("second join partner?");
+    switch (animationState) {
+        case 0:{
+            if (event.key === "Enter"){
+                animationState = 1;
+            }
+            break;
         }
-        else if (joinpartners.q === null) {
-            joinpartners.q = event.key;
+        case 1:{
+            if (joinpartners.p === null) {
+                joinpartners.p = event.key;
+                inputAlert.draw("second join partner?");
+            }
+            else if (joinpartners.q === null) {
+                joinpartners.q = event.key;
+            }
+            else break;
         }
-        else return;
-    }
-    if (animationState === 2){
-        if (event.key === "Enter"){
-            union(joinpartners.p, joinpartners.q);
-            joinpartners.p = null;
-            joinpartners.q = null;
-            animationState = 0;
+        case 2:{
+            if (event.key === "Enter"){
+                union(joinpartners.p, joinpartners.q);
+                joinpartners.p = null;
+                joinpartners.q = null;
+                animationState = 0;
+            }
+            break;
         }
     }
 })
@@ -237,12 +246,14 @@ function animate(){
         case 0: {
             ctx.clearRect(0,0,canvas.width, canvas.height);
             for (let i = 0; i < junctionArray.length; i++) {
-                junctionArray[i].update();
                 junctionArray[i].drawEdges();
+            }
+            for (let i = 0; i < junctionArray.length; i++) {
+                junctionArray[i].update();
                 junctionArray[i].draw();
             }
             bigBox.draw();
-            newUnionBox.draw("NEW UNION");
+            newUnionBox.draw("NEW UNION (ENTER)");
             break;
         }
         case 1:{
