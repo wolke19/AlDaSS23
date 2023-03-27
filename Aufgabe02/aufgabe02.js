@@ -128,8 +128,8 @@ class Junction {
         let pullEdgesParameter = 100;
         let pushAllParameter = 600;
 
-        this.speedX /= 1.1;
-        this.speedY /= 1.1;
+        this.speedX /= 1.006;
+        this.speedY /= 1.006;
 
         for (let i = 0; i < junctionArray.length; i++) {
             if (i === this.number) continue;
