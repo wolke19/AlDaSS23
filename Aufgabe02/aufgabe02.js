@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let smallScreenWarning = true;
+let infobox = true;
 let radius = 45;
 const junctionArray = [];
 let animationState = 0;
@@ -251,14 +251,11 @@ let yesField = new Textbox(canvas.width/2 - 170, canvas.height/2 + 80, 150, 70,
     "black", "35px Arial", "white", "green");
 let noField = new Textbox(canvas.width/2 + 20, canvas.height/2 + 80, 150, 70,
     "black", "35px Arial", "white", "red");
-let smallScreenWarningBox = new Textbox(canvas.height - 30, 0, canvas.width, 30, "black",
+let infoBox = new Textbox(0, canvas.height - 20, canvas.width, 20, "black",
     "15px Arial", "white", "black");
 
 // ANIMATION____________________________________________________________________________________________________________
 function animate(){
-    if (canvas.width < 500 && smallScreenWarning === true){
-        smallScreenWarningBox.draw("screen too small? try desktop pc")
-    }
     switch (animationState) {
         case 0: {
             ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -290,6 +287,9 @@ function animate(){
             break;
         }
     }
+    // if (infoBox){
+    //     infoBox.draw("no support for smartphones");
+    // }
     requestAnimationFrame(animate);
 }
 
