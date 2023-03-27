@@ -153,6 +153,8 @@ function init(){
     union(4,6);
     union(0,4);
     union(4,3);
+    
+    union(8,9);
     console.log()
 }
 
