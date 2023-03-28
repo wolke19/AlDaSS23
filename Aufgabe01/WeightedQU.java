@@ -45,8 +45,8 @@ public class WeightedQU {
     }
 
     public static void createConnections (WeightedQU uf) throws IOException {
-        Path pathP = Paths.get("Aufgabe02/p.txt");
-        Path pathQ = Paths.get("Aufgabe02/q.txt");
+        Path pathP = Paths.get("Aufgabe01/p.txt");
+        Path pathQ = Paths.get("Aufgabe01/q.txt");
 
         Scanner psc = new Scanner(pathP);
         Scanner qsc = new Scanner(pathQ);
@@ -68,41 +68,52 @@ public class WeightedQU {
     }
 
     public static void main(String[] args) throws IOException {
-        WeightedQU uf = new WeightedQU(11);
-        createConnections(uf);
-
-        Path citiesPath = Paths.get("Aufgabe02/cities.txt");
-        Scanner citieScanner = new Scanner(citiesPath);
-        String[] cities = new String[11];
-        for (int i = 0; i < 11; i++){
-            cities[i] = citieScanner.nextLine();
-        }
-
-        int actionHandler = 0;
+        System.out.println("input: 2 for LE2, 3 for LE3");
         Scanner scanner = new Scanner(System.in);
+        int wish = scanner.nextInt();
+
+        switch (wish) {
+            case 2: {
+                WeightedQU uf = new WeightedQU(11);
+                createConnections(uf);
+
+                Path citiesPath = Paths.get("Aufgabe01/cities.txt");
+                Scanner citieScanner = new Scanner(citiesPath);
+                String[] cities = new String[11];
+                for (int i = 0; i < 11; i++) {
+                    cities[i] = citieScanner.nextLine();
+                }
+
+                int actionHandler = 0;
 
 
-        while (actionHandler == 0){
-            System.out.println("Verbindungsanfrage. Bitte Zwei Städte auswählen.");
-            for (int i = 0; i < cities.length; i++){
-                System.out.printf("(%d) für %s%n", i, cities[i]);
-            }
+                while (actionHandler == 0) {
+                    System.out.println("Verbindungsanfrage. Bitte Zwei Städte auswählen.");
+                    for (int i = 0; i < cities.length; i++) {
+                        System.out.printf("(%d) für %s%n", i, cities[i]);
+                    }
 
 //        Verbindungsanfrage
 
 
-            int pIn = scanner.nextInt();
-            int qIn = scanner.nextInt();
+                    int pIn = scanner.nextInt();
+                    int qIn = scanner.nextInt();
 
-            if (uf.connected(pIn, qIn)) System.out.println("Verbindung vorhanden!");
-            else {
-                uf.union(pIn, qIn);
-                System.out.println("Verbindung jetzt angelegt.");
+                    if (uf.connected(pIn, qIn)) System.out.println("Verbindung vorhanden!");
+                    else {
+                        uf.union(pIn, qIn);
+                        System.out.println("Verbindung jetzt angelegt.");
+                    }
+
+
+                    System.out.println("Weitere Verbindung anfragen? (0) für JA, (1) für NEIN.");
+                    actionHandler = scanner.nextInt();
+                }
+                break;
             }
+            case 3: {
 
-
-            System.out.println("Weitere Verbindung anfragen? (0) für JA, (1) für NEIN.");
-            actionHandler = scanner.nextInt();
+            }
         }
         scanner.close();
     }

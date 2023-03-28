@@ -41,7 +41,7 @@ public class ThreeSum {
             double result = count(intArr);
             double elapsedTime = stopwatch.elapsedTime();
             timeArr[i] = elapsedTime;
-            System.out.printf("run finished. elapsed time = %f%n", result);
+            System.out.printf("run finished. elapsed time = %f%n", elapsedTime);
         }
         return timeArr;
     }
