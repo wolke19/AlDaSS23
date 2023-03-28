@@ -69,14 +69,10 @@ public class ThreeSum {
         System.out.println("------------- RESULTS------------- ");
         System.out.println();
 
-
         System.out.printf("%10s | %15s%n", "N", "Laufzeit");
         for (int i = 0; i < nArr.length; i++) {
             System.out.printf("%10d | %15.5f s %n", nArr[i],timeArr[i]);
         }
-
-
-
     }
 
     public static void main(String[] args) {
@@ -84,5 +80,4 @@ public class ThreeSum {
         double[] timeArr = runTestLoop(nArr);
         printResults(nArr,timeArr);
     }
-
 }

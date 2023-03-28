@@ -104,15 +104,26 @@ public class WeightedQU {
                         uf.union(pIn, qIn);
                         System.out.println("Verbindung jetzt angelegt.");
                     }
-
-
                     System.out.println("Weitere Verbindung anfragen? (0) für JA, (1) für NEIN.");
                     actionHandler = scanner.nextInt();
                 }
                 break;
             }
             case 3: {
+                System.out.println("Anzahl Kugeln");
+                int n = scanner.nextInt();
+                System.out.println("Anzahl Unions");
+                int nUnions = scanner.nextInt();
 
+                WeightedQU uf = new WeightedQU(n);
+                Stopwatch stopwatch = new Stopwatch();
+                for (int i = 0; i < nUnions; i++) {
+                    int p = (int) (Math.random()*n);
+                    int q = (int) (Math.random()*n);
+                    uf.union(q,p);
+                }
+                double time = stopwatch.elapsedTime();
+                System.out.println(time + "s");
             }
         }
         scanner.close();
