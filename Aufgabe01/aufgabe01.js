@@ -159,8 +159,10 @@ class Junction {
     }
     drawEdges(){
         ctx.moveTo(this.x, this.y);
-        ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
-        ctx.stroke();
+        if (this.group !== this.number){
+            ctx.lineTo(junctionArray[this.group].x, junctionArray[this.group].y);
+            ctx.stroke();
+        }
     }
     draw(){
         ctx.fillStyle = "hsl(" + 150 + (find(this.number) * 1000 ) + ", 100%, 50%)";
@@ -206,6 +208,8 @@ class Textbox {
         }
     }
 }
+
+Math.random()*101|0;
 
 // STANDALONE FUNCTIONS_________________________________________________________________________________________________________________
 function find(p){
