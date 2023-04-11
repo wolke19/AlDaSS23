@@ -15,28 +15,19 @@ public class PostfixToInfix {
 
             switch (temp){
 
-                case "+" -> {
-                    double result = postfixStack.pop() + postfixStack.pop();
-                    postfixStack.push(result);
-                }
+                case "+" -> postfixStack.push(postfixStack.pop() + postfixStack.pop()) ;
+                case "*" -> postfixStack.push(postfixStack.pop() * postfixStack.pop());
 
                 case "-" -> {
                     double firstPop = postfixStack.pop();
                     double secondPop = postfixStack.pop();
-                    double result = secondPop - firstPop;
-                    postfixStack.push(result);
+                    postfixStack.push(secondPop-firstPop);
                 }
 
                 case "/" -> {
                     double nenner = postfixStack.pop();
                     double zaehler = postfixStack.pop();
-                    double result = zaehler / nenner;
-                    postfixStack.push(result);
-                }
-
-                case "*" -> {
-                    double result = postfixStack.pop() * postfixStack.pop();
-                    postfixStack.push(result);
+                    postfixStack.push(zaehler / nenner);
                 }
 
                 default -> postfixStack.push(Double.parseDouble(temp));
