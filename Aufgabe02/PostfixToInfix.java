@@ -14,22 +14,10 @@ public class PostfixToInfix {
             String temp = fileScanner.next();
 
             switch (temp){
-
                 case "+" -> postfixStack.push(postfixStack.pop() + postfixStack.pop()) ;
                 case "*" -> postfixStack.push(postfixStack.pop() * postfixStack.pop());
-
-                case "-" -> {
-                    double firstPop = postfixStack.pop();
-                    double secondPop = postfixStack.pop();
-                    postfixStack.push(secondPop-firstPop);
-                }
-
-                case "/" -> {
-                    double nenner = postfixStack.pop();
-                    double zaehler = postfixStack.pop();
-                    postfixStack.push(zaehler / nenner);
-                }
-
+                case "-" -> postfixStack.push(-postfixStack.pop() + postfixStack.pop());
+                case "/" -> postfixStack.push(Math.pow((postfixStack.pop() / postfixStack.pop()), -1));
                 default -> postfixStack.push(Double.parseDouble(temp));
             }
         }
