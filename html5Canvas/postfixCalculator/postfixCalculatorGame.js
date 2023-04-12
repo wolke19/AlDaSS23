@@ -5,7 +5,7 @@ let c = document.getElementById("c"),
 
     goal = 10,
     score = 0,
-    remainingChars = 10,
+    remainingChars = 20,
     calcStack = [],
     histStack = [],
     checkInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"],
@@ -100,7 +100,7 @@ function handleText(){
 }
 
 function handleGame(){
-    remainingChars = 10 - histStack.length;
+    remainingChars = 20 - histStack.length;
     if (remainingChars === 0) {
         score = 0;
         goal = Math.floor(Math.random() * 1000);
