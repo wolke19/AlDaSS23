@@ -3,7 +3,7 @@ let c = document.getElementById("c"),
     h = c.height = window.innerHeight,
     ctx = c.getContext( '2d' ),
 
-    goal = -15,
+    goal = 10,
     score = 0,
     remainingChars = 20,
     calcStack = [],
@@ -109,7 +109,7 @@ function handleGame(){
     }
     if (calcStack[calcStack.length - 1] === goal) {
         score++;
-        goal = Math.floor(Math.random() * 2000 - 1000);
+        goal = Math.floor(Math.random() * 1000);
         histStack.length = 0;
         calcStack.length = 0;
     }
