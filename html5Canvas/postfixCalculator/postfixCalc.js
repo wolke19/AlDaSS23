@@ -38,7 +38,7 @@ addEventListener("keypress", function (event){
                 break;
             case "*": calcStack.push(calcStack.pop() * calcStack.pop());
                 break;
-            case "/": calcStack.push(Math.pow(calcStack.pop() / calcStack.pop(), -1));
+            case "/": calcStack.push((Math.pow(calcStack.pop() / calcStack.pop(), -1)).toFixed(2));
                 break;
             default: calcStack.push(parseFloat(event.key));
         }
