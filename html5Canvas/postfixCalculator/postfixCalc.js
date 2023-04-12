@@ -3,6 +3,10 @@ let c = document.getElementById("c"),
     h = c.height = window.innerHeight,
     ctx = c.getContext( '2d' ),
 
+    calcStack = [],
+    histStack = [],
+    checkInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"],
+
     next = {
         cx: 150,
         cy: 150,
@@ -12,11 +16,7 @@ let c = document.getElementById("c"),
         leftBoundary: 0,
         upperBoundary: 0,
         lowerBoundary: 0
-    },
-
-    calcStack = [],
-    histStack = [],
-    checkInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"];
+    };
 
 next.rightBoundary = next.cx + next.w/2;
 next.leftBoundary = next.cx - next.w/2;
