@@ -68,6 +68,10 @@ function handleInputBar(){
     ctx.font = "30px Arial";
     ctx.textAlign = "center";
     ctx.fillText(histStack.join("  "), w/2, h - 135, w - 600);
+    ctx.fillStyle = "grey";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("warte auf Tastatureingabe ...", 310, h-180, 200);
 }
 function handleStack(){
     ctx.font = "25px Arial";
@@ -93,6 +97,7 @@ function animate() {
     ctx.font = "30px Arial";
     ctx.fillText("Aufgabe 2 - Postfix Calculator", w/2, 100, w);
     ctx.fillText("NEXT", next.cx, next.cy, 200 );
+
 
     handleInputBar();
     handleStack();
