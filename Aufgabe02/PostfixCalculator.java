@@ -18,7 +18,7 @@ public class PostfixCalculator {
                 case "*" -> postfixStack.push(postfixStack.pop() * postfixStack.pop());
                 case "-" -> postfixStack.push(- postfixStack.pop() + postfixStack.pop());
                 case "/" -> postfixStack.push(Math.pow((postfixStack.pop() / postfixStack.pop()), -1));
-                default -> postfixStack.push(Double.parseDouble(temp));
+                default  -> postfixStack.push(Double.parseDouble(temp));
             }
         }
 

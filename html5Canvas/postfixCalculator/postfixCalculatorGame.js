@@ -3,6 +3,9 @@ let c = document.getElementById("c"),
     h = c.height = window.innerHeight,
     ctx = c.getContext( '2d' ),
 
+    goal = 10,
+    score = 0,
+    remainingChars = 10,
     calcStack = [],
     histStack = [],
     checkInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"],
@@ -90,11 +93,32 @@ function handleText(){
     ctx.font = "30px Arial";
     ctx.fillText("Aufgabe 2 - Postfix Calculator", w/2, 100, w);
     ctx.fillText("NEXT", next.cx, next.cy, 200 );
+    ctx.textAlign = "left";
+    ctx.fillText("Score: " + score, w/2 - 400, h -350, 150);
+    ctx.fillText("Goal: " + goal, w/2 - 400, h - 300, 150);
+    ctx.fillText("remaining: " + remainingChars, w/2 -400, h -250, 150);
+}
+
+function handleGame(){
+    remainingChars = 10 - histStack.length;
+    if (remainingChars === 0) {
+        score = 0;
+        goal = Math.floor(Math.random() * 1000);
+        histStack.length = 0;
+        calcStack.length = 0;
+    }
+    if (calcStack[calcStack.length - 1] === goal) {
+        score++;
+        goal = Math.floor(Math.random() * 1000);
+        histStack.length = 0;
+        calcStack.length = 0;
+    }
+
 }
 
 function animate() {
     ctx.clearRect(0,0,c.width, c.height); // alternativ: ctx.drawImage(background, 0, 0);
-
+    handleGame();
     handleText();
     handleInputBar();
     handleStack();
