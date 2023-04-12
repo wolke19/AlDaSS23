@@ -29,6 +29,14 @@ addEventListener("resize", function () {
     canvas.height = window.innerHeight;
 });
 addEventListener("click", function (event){
+
+    if (event.x > canvas.width * 0.15 - 100 &&
+        event.x < canvas.width * 0.15 + 100 &&
+        event.y > canvas.height - 150 &&
+        event.y < canvas.height - 100) {
+        window.location = "https://wolke19.github.io/AlDaSS23/html5Canvas/postfixCalculator";
+    }
+
     switch (animationState){
         case 0: {
             if (event.x > newUnionBox.x &&
@@ -209,8 +217,6 @@ class Textbox {
     }
 }
 
-Math.random()*101|0;
-
 // STANDALONE FUNCTIONS_________________________________________________________________________________________________________________
 function find(p){
     let pTemp = p;
@@ -261,6 +267,13 @@ function animate(){
     switch (animationState) {
         case 0: {
             ctx.clearRect(0,0,canvas.width, canvas.height);
+
+            // next
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("NEXT", canvas.width * 0.15, canvas.height -100 , 200 );
+
+
             for (let i = 0; i < junctionArray.length; i++) {
                 junctionArray[i].drawEdges();
             }

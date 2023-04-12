@@ -8,9 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Aufgabe04" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Aufgabe05" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Aufgabe06" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Aufgabe00" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Aufgabe02" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/html5Canvas" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
