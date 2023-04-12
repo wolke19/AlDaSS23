@@ -12,24 +12,19 @@ let c = document.getElementById("c"),
         leftBoundary: 0,
         upperBoundary: 0,
         lowerBoundary: 0
-    }
-    // background = new Image(w, h),
-    next.rightBoundary = next.cx + next.w/2;
-    next.leftBoundary = next.cx - next.w/2;
-    next.upperBoundary = next.cy - next.h/2;
-    next.lowerBoundary = next.cy + next.h/2;
+    },
 
-
-    tick = 0,
     calcStack = [],
     histStack = [],
     checkInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"];
 
-ctx.fillStyle = "black";
+next.rightBoundary = next.cx + next.w/2;
+next.leftBoundary = next.cx - next.w/2;
+next.upperBoundary = next.cy - next.h/2;
+next.lowerBoundary = next.cy + next.h/2;
+
+// let background = new Image(w, h);
 // background.src = "Aufgabe02/andrew-c-31-00000.jpg";
-
-
-
 
 // EVENTS   --------------------------------------------------------------------------------------------------
 addEventListener("keypress", function (event){
@@ -73,6 +68,7 @@ function handleInputBar(){
     ctx.textAlign = "left";
     ctx.fillText("warte auf Tastatureingabe ...", 310, h-180, 200);
 }
+
 function handleStack(){
     ctx.font = "25px Arial";
     ctx.textAlign = "center";
@@ -85,20 +81,21 @@ function handleStack(){
 }
 
 function handleEffects(){
-
+//     TODO
 }
 
-
-function animate() {
-    ctx.clearRect(0,0,c.width, c.height); // ctx.drawImage(background, 0, 0, );
-    tick++;
+function handleText(){
     ctx.fillStyle = "grey";
     ctx.textAlign = "center";
     ctx.font = "30px Arial";
     ctx.fillText("Aufgabe 2 - Postfix Calculator", w/2, 100, w);
     ctx.fillText("NEXT", next.cx, next.cy, 200 );
+}
 
+function animate() {
+    ctx.clearRect(0,0,c.width, c.height); // alternativ: ctx.drawImage(background, 0, 0);
 
+    handleText();
     handleInputBar();
     handleStack();
     requestAnimationFrame( animate );
