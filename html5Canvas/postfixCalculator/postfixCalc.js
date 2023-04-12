@@ -3,7 +3,23 @@ let c = document.getElementById("c"),
     h = c.height = window.innerHeight,
     ctx = c.getContext( '2d' ),
 
+    next = {
+        cx: 150,
+        cy: 150,
+        w: 200,
+        h: 50,
+        rightBoundary: 0,
+        leftBoundary: 0,
+        upperBoundary: 0,
+        lowerBoundary: 0
+    }
     // background = new Image(w, h),
+    next.rightBoundary = next.cx + next.w/2;
+    next.leftBoundary = next.cx - next.w/2;
+    next.upperBoundary = next.cy - next.h/2;
+    next.lowerBoundary = next.cy + next.h/2;
+
+
     tick = 0,
     calcStack = [],
     histStack = [],
@@ -35,10 +51,10 @@ addEventListener("keypress", function (event){
 })
 
 addEventListener("click", function (event){
-    if (event.x > c.width * 0.15 - 100 &&
-        event.x < c.width * 0.15 + 100 &&
-        event.y > c.height - 150 &&
-        event.y < c.height - 100) {
+    if (event.x > next.leftBoundary &&
+        event.x < next.rightBoundary &&
+        event.y > next.upperBoundary &&
+        event.y < next.lowerBoundary) {
         window.location = "https://wolke19.github.io/AlDaSS23";
     }
 })
@@ -76,7 +92,7 @@ function animate() {
     ctx.textAlign = "center";
     ctx.font = "30px Arial";
     ctx.fillText("Aufgabe 2 - Postfix Calculator", w/2, 100, w);
-    ctx.fillText("NEXT", c.width * 0.15, c.height -100 , 200 );
+    ctx.fillText("NEXT", next.cx, next.cy, 200 );
 
     handleInputBar();
     handleStack();
