@@ -83,8 +83,11 @@ function handleStack(){
     }
 }
 
-function handleEffects(){
+function handleVisualEffects(){
 //     TODO
+}
+function handleAudioEffects(){
+//     TODO: aufsteigende Tonfolge. Entäuschter sound bei verloren, Yay/Applaus bei gewonnen
 }
 
 function handleText(){
