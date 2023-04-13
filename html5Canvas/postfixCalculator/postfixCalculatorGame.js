@@ -101,19 +101,12 @@ function handleText(){
 
 function handleGame(){
     remainingChars = 20 - histStack.length;
-    if (remainingChars === 0) {
-        score = 0;
+    if (remainingChars === 0 || calcStack[calcStack.length - 1] === goal) {
+        (remainingChars !== 0) ? score++ : score = 0;
         goal = Math.floor(Math.random() * 1000);
         histStack.length = 0;
         calcStack.length = 0;
     }
-    if (calcStack[calcStack.length - 1] === goal) {
-        score++;
-        goal = Math.floor(Math.random() * 1000);
-        histStack.length = 0;
-        calcStack.length = 0;
-    }
-
 }
 
 function animate() {
