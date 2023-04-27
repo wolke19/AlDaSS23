@@ -12,7 +12,6 @@ public class PostfixCalculator {
 
         while (fileScanner.hasNext()){
             String temp = fileScanner.next();
-
             switch (temp){
                 case "+" -> postfixStack.push(postfixStack.pop() + postfixStack.pop());
                 case "*" -> postfixStack.push(postfixStack.pop() * postfixStack.pop());
