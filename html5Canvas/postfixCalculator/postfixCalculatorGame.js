@@ -8,7 +8,8 @@ let c = document.getElementById("c"),
     remainingChars = 20,
     calcStack = [],
     histStack = [],
-    checkInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"],
+    checkInput
+        = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/"],
 
     next = {
         cx: 150,

@@ -18,7 +18,6 @@ public class MergeSort {
             this.email = email;
         }
     }
-
 //    _________ FUNKTIONEN _____________________________________________________________________________________________
     public static void prepareEmailBuilderArrays() throws IOException {
         Path adjPath = Paths.get("Aufgabe03/adjectiveList.txt");
@@ -45,7 +44,6 @@ public class MergeSort {
 //            System.out.printf("%-45s Note: %.1f %n", unsortedList[i].email, unsortedList[i].note);
         }
     }
-
     public static void insertionSort(Student[] arr, int start, int end){
         for (int i = start; i <= end; i++) {
             for (int j = i; j > start; j--) {
@@ -84,8 +82,6 @@ public class MergeSort {
             merge(arr, temp, start, mid, end);
         }
     }
-
-
 //    __________ PSVM __________________________________________________________________________________________________
     public static void main(String[] args) throws IOException {
         int n = 100000;
