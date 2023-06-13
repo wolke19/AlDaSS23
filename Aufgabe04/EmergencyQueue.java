@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 public class EmergencyQueue {
-    public class Incident{
+    public static class Incident{
         public int emergencyLevel;
         public String name;
         public Incident(int emergencyLevel, String callerName){
@@ -40,7 +40,6 @@ public class EmergencyQueue {
             k = k / 2;
         }
     }
-
     private void swapDown(int k){
         while (2*k <= len){
             int j = 2*k;
@@ -57,7 +56,7 @@ public class EmergencyQueue {
     }
 
     public static void printHeap(EmergencyQueue heap, int len){
-        int hoehe = (int) Math.ceil((Math.log(heap.queue.length)/ Math.log(2)) - 1);
+        int hoehe = (int) Math.ceil((Math.log(15)/ Math.log(2)) - 1);
         int breite = (int) Math.pow(2, hoehe);
         System.out.println("------- STATS -------");
         System.out.println("Höhe: " + hoehe);
@@ -90,23 +89,23 @@ public class EmergencyQueue {
     }
 
     public static void main(String[] args) {
-        int cap = 15;
+        int cap = 100;
         EmergencyQueue campusFestivalSOS = new EmergencyQueue(cap);
 
 
         while (true){
-            System.out.println("action? (0 for enqueue, 1 for dequeue, 2 for quit, 3 to randomly fill queue");
+            System.out.println("action? (0 for enqueue, 1 for dequeue, 2 for quit");
             Scanner scanner = new Scanner(System.in);
             int action = scanner.nextInt();
             switch (action) {
                 case 0 -> {
                     System.out.println("enter em. lvl");
                     int newIncEmergency = scanner.nextInt();
-                    System.out.println("enter caller name");
-                    String newIncName = scanner.next();
-                    if (campusFestivalSOS.len >= cap) System.out.println("QUEUE CAPACITY REACHED! CRASHING NOW ..... bitch");
-                    campusFestivalSOS.enqueue(newIncEmergency, newIncName);
-                    System.out.println("Inc. queued");
+//                    System.out.println("enter caller name");
+//                    String newIncName = scanner.next();
+                    if (campusFestivalSOS.len >= cap) System.out.println("QUEUE CAPACITY REACHED! CRASHING NOW");
+                    campusFestivalSOS.enqueue(newIncEmergency, "name");
+                    System.out.println("Incident queued");
                 }
                 case 1 -> {
                     if (campusFestivalSOS.len == 0) System.out.println("NO ELEMENT TO DELETE! CRAHSING NOW :)");
@@ -131,6 +130,5 @@ public class EmergencyQueue {
             }
             printHeap(campusFestivalSOS, campusFestivalSOS.len);
         }
-
     }
 }
