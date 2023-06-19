@@ -19,8 +19,8 @@ public class Graph {
     }
     public void addEdge(int v, int w, int weight){
         this.edgeCount++;
-        adj[v-1].add(w-1, weight);
-        adj[w-1].add(v-1, weight);
+        adj[v].add(w, weight);
+        adj[w].add(v, weight);
     }
     public void printGraph(){
         System.out.println("GRAPH _______");

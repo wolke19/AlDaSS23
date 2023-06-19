@@ -29,10 +29,10 @@ public class Bag {
     }
 
     private class Edge {
-        private int dest;
-        private int weight;
+        private final int dest;
+        private final int weight;
         private Edge next;
-        public Edge(int weight, int dest){
+        public Edge(int dest, int weight){
             this.dest = dest;
             this.weight = weight;
         }
