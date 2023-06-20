@@ -10,14 +10,14 @@ public class PostfixCalculator {
         Path inputPath = Paths.get("Aufgabe02/PostfixInput.txt");
         Scanner fileScanner = new Scanner(inputPath);
 
-        while (fileScanner.hasNext()){
+        while (fileScanner.hasNext()) {
             String temp = fileScanner.next();
-            switch (temp){
+            switch (temp) {
                 case "+" -> postfixStack.push(postfixStack.pop() + postfixStack.pop());
                 case "*" -> postfixStack.push(postfixStack.pop() * postfixStack.pop());
-                case "-" -> postfixStack.push(- postfixStack.pop() + postfixStack.pop());
+                case "-" -> postfixStack.push(-postfixStack.pop() + postfixStack.pop());
                 case "/" -> postfixStack.push(Math.pow((postfixStack.pop() / postfixStack.pop()), -1));
-                default  -> postfixStack.push(Double.parseDouble(temp));
+                default -> postfixStack.push(Double.parseDouble(temp));
             }
         }
 

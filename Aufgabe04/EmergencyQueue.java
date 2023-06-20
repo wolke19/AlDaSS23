@@ -1,24 +1,25 @@
 import java.util.Scanner;
 
 
-
 public class EmergencyQueue {
-    public static class Incident{
+    public static class Incident {
         public int emergencyLevel;
         public String name;
-        public Incident(int emergencyLevel, String callerName){
+
+        public Incident(int emergencyLevel, String callerName) {
             this.emergencyLevel = emergencyLevel;
             this.name = callerName;
         }
     }
-    private Incident queue[];
+
+    private final Incident[] queue;
     private int len;
 
-    public EmergencyQueue(int capacity){
+    public EmergencyQueue(int capacity) {
         queue = new Incident[capacity + 1];
     }
 
-    int delMax(){
+    int delMax() {
         int root = queue[1].emergencyLevel;
         swap(1, len--);
         queue[len + 1] = null;
@@ -26,37 +27,41 @@ public class EmergencyQueue {
         return root;
     }
 
-    public void enqueue(int emergencyLevel, String callerName){
+    public void enqueue(int emergencyLevel, String callerName) {
         //Todo: handle cases when queue cap is reached
         queue[++len] = new Incident(emergencyLevel, callerName);
         swapUp(len);
     }
 
-    public boolean isEmpty(){return len == 0;}
+    public boolean isEmpty() {
+        return len == 0;
+    }
 
-    public void swapUp(int k){
-        while (k > 1 && queue[k/2].emergencyLevel < queue[k].emergencyLevel){
-            swap(k, k/2);
+    public void swapUp(int k) {
+        while (k > 1 && queue[k / 2].emergencyLevel < queue[k].emergencyLevel) {
+            swap(k, k / 2);
             k = k / 2;
         }
     }
-    private void swapDown(int k){
-        while (2*k <= len){
-            int j = 2*k;
-            if (j < len && queue[j].emergencyLevel < queue[j+1].emergencyLevel) j++;
+
+    private void swapDown(int k) {
+        while (2 * k <= len) {
+            int j = 2 * k;
+            if (j < len && queue[j].emergencyLevel < queue[j + 1].emergencyLevel) j++;
             if (queue[k].emergencyLevel >= queue[j].emergencyLevel) break;
             swap(k, j);
             k = j;
         }
     }
-    private void swap(int x1, int x2){
+
+    private void swap(int x1, int x2) {
         Incident temp = queue[x2];
         queue[x2] = queue[x1];
         queue[x1] = temp;
     }
 
-    public static void printHeap(EmergencyQueue heap, int len){
-        int hoehe = (int) Math.ceil((Math.log(15)/ Math.log(2)) - 1);
+    public static void printHeap(EmergencyQueue heap, int len) {
+        int hoehe = (int) Math.ceil((Math.log(15) / Math.log(2)) - 1);
         int breite = (int) Math.pow(2, hoehe);
         System.out.println("------- STATS -------");
         System.out.println("Höhe: " + hoehe);
@@ -64,13 +69,13 @@ public class EmergencyQueue {
         System.out.println("------- HEAP -------");
         for (int i = 0; i <= hoehe; i++) {
 //            if (i%2 == 0) System.out.print("          ");
-            printEmpty(2 * breite / Math.pow(2, i+1));
+            printEmpty(2 * breite / Math.pow(2, i + 1));
             int startElement = (int) Math.pow(2, i);
-            int endElement = (int) Math.pow(2, i+1) - 1;
+            int endElement = (int) Math.pow(2, i + 1) - 1;
             for (int j = startElement; j <= endElement; j++) {
-                if (j <= len){
+                if (j <= len) {
                     System.out.printf("%-10s", heap.queue[j].emergencyLevel);
-                    switch (i){
+                    switch (i) {
                         case 1 -> printEmpty(7);
                         case 2 -> printEmpty(3);
                         case 3 -> printEmpty(1);
@@ -82,7 +87,8 @@ public class EmergencyQueue {
             System.out.println();
         }
     }
-    public static void printEmpty (double count){
+
+    public static void printEmpty(double count) {
         for (int i = 0; i < (int) count; i++) {
             System.out.print("          ");
         }
@@ -93,7 +99,7 @@ public class EmergencyQueue {
         EmergencyQueue campusFestivalSOS = new EmergencyQueue(cap);
 
 
-        while (true){
+        while (true) {
             System.out.println("action? (0 for enqueue, 1 for dequeue, 2 for quit");
             Scanner scanner = new Scanner(System.in);
             int action = scanner.nextInt();

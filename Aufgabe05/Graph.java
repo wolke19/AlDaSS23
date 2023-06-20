@@ -1,10 +1,9 @@
-
-
 public class Graph {
-    private int nodeCount;
+    private final int nodeCount;
     private int edgeCount;
-    private Bag[] adj;
-    public Graph(int nodeCount){
+    private final Bag[] adj;
+
+    public Graph(int nodeCount) {
         this.nodeCount = nodeCount;
         this.edgeCount = 0;
         this.adj = new Bag[nodeCount];
@@ -12,17 +11,20 @@ public class Graph {
             this.adj[i] = new Bag();
         }
     }
-    public void setNames(String[] names){
+
+    public void setNames(String[] names) {
         for (int i = 0; i < names.length; i++) {
             this.adj[i].setName(names[i]);
         }
     }
-    public void addEdge(int v, int w, int weight){
+
+    public void addEdge(int v, int w, int weight) {
         this.edgeCount++;
         adj[v].add(w, weight);
         adj[w].add(v, weight);
     }
-    public void printGraph(){
+
+    public void printGraph() {
         System.out.println("GRAPH _______");
         System.out.println("NodeCount: " + this.nodeCount);
         System.out.println("EdgeCount: " + this.edgeCount);

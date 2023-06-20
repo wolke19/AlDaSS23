@@ -5,9 +5,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class InsertionSort {
-    private static String user = "Lars";
-//    private static String[] emails = {"Patrick", "Miles", "Milka", "Marco", "Lars"};
-    private static String[] alleNoten = {"1.0", "1.3", "1.5", "1.7", "2.0", "2.0", "2.3",
+    private static final String user = "Lars";
+    //    private static String[] emails = {"Patrick", "Miles", "Milka", "Marco", "Lars"};
+    private static final String[] alleNoten = {"1.0", "1.3", "1.5", "1.7", "2.0", "2.0", "2.3",
             "2.5", "2.7", "3.0", "3.3", "3.5", "3.7", "4.0"};
 
 //    private static String[][] listeErstellen(String[] emails){
@@ -26,7 +26,7 @@ public class InsertionSort {
         Scanner scanner = new Scanner(path);
 
         int n = 0;
-        while (countSc.hasNext()){
+        while (countSc.hasNext()) {
             countSc.nextLine();
             n++;
         }
@@ -41,14 +41,14 @@ public class InsertionSort {
         return liste;
     }
 
-    public static String noteEinlesen(){
+    public static String noteEinlesen() {
         Scanner inputScanner = new Scanner(System.in);
         System.out.println("Eigene Note eingeben: ");
         return inputScanner.next();
 //        TODO: checken ob Eingabe in alleNoten enthalten ist
     }
 
-    public static void sort(String[][] liste){
+    public static void sort(String[][] liste) {
         int N = liste.length;
         for (int i = 0; i < N; i++) {
             for (int j = i; j > 0; j--) {
@@ -61,13 +61,12 @@ public class InsertionSort {
                     String tempEmail = liste[j - 1][0];
                     liste[j - 1][0] = liste[j][0];
                     liste[j][0] = tempEmail;
-                }
-                else break;
+                } else break;
             }
         }
     }
 
-    public static void ausgabe(String[][] liste){
+    public static void ausgabe(String[][] liste) {
         System.out.println("------- NOTENLISTE -------");
         for (int i = 0; i < liste.length; i++) {
             System.out.printf("Student: %10s@htwg-konstanz.de  |   Note: %s%n", liste[i][0], liste[i][1]);
