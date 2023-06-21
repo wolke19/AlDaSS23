@@ -30,7 +30,7 @@ public class Graph {
         System.out.println("EdgeCount: " + this.edgeCount);
         System.out.println();
         for (Bag bag : adj) {
-            bag.printBag();
+            bag.printBagVer2();
         }
     }
 }
