@@ -22,10 +22,15 @@ public class Bag {
     public void printBag() {
         System.out.println("NODE: " + this.name);
         System.out.println("N: " + this.n);
-        Edge iterator = this.first;
-        while (iterator != null) {
-            iterator.printEdge();
-            iterator = iterator.next;
+
+//        Edge iterator = this.first;
+//        while (iterator != null) {
+//            iterator.printEdge();
+//            iterator = iterator.next;
+//        }
+
+        for (Edge e = this.first; e != null ; e = e.next) {
+            e.printEdge();
         }
         System.out.println();
     }
